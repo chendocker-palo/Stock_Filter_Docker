@@ -1,0 +1,20 @@
+services:
+  web:
+    build: .
+    container_name: stock-filter-web
+    restart: unless-stopped
+    working_dir: /app
+    command: python web/app.py
+    ports:
+      - "62841:62841"
+    volumes:
+      - ./:/app
+
+  scheduler:
+    build: .
+    container_name: stock-filter-scheduler
+    restart: unless-stopped
+    working_dir: /app
+    command: python scheduler.py
+    volumes:
+      - ./:/app
